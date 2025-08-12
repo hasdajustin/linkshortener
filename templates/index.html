@@ -1,18 +1,62 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1 class="mb-4">🔗 Link Shortener</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <h1 class="text-center text-primary mb-4">
+                        <i class="fas fa-link"></i> Link Shortener
+                    </h1>
 
-    <form method="POST">
-        <div class="mb-3">
-            <input type="url" name="original_url" class="form-control" placeholder="Enter your URL" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Shorten</button>
-    </form>
+                    <form method="POST" novalidate>
+                        <div class="form-floating mb-3">
+                            <input type="url" name="original_url" id="original_url" class="form-control" placeholder="https://example.com" required>
+                            <label for="original_url">Enter a URL to shorten</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-compress-alt"></i> Shorten URL
+                            </button>
+                        </div>
+                    </form>
 
-    {% if short_url %}
-        <div class="alert alert-success mt-4">
-            Short URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+                    {% if short_url %}
+                    <div class="card mt-5 border-success shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <i class="fas fa-check-circle"></i> Your Shortened Link
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <input type="text" id="shortUrl" class="form-control" value="{{ short_url }}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyURL()">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                                <a href="{{ short_url }}" download class="btn btn-outline-primary">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                            <p class="text-muted mb-0">
+                                Share this URL anywhere, it redirects to your original link.
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    {% endif %}
+    </div>
+</div>
+
+<!-- JS to copy URL -->
+<script>
+    function copyURL() {
+        const shortUrlInput = document.getElementById('shortUrl');
+        shortUrlInput.select();
+        shortUrlInput.setSelectionRange(0, 99999); // mobile support
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+    }
+</script>
 {% endblock %}

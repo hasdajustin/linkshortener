@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1 class="mb-4">🔗 Link Shortener</h1>
+
+    <form method="POST">
+        <div class="mb-3">
+            <input type="url" name="original_url" class="form-control" placeholder="Enter your URL" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Shorten</button>
+    </form>
+
+    {% if short_url %}
+        <div class="alert alert-success mt-4">
+            Short URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
+        </div>
+    {% endif %}
+{% endblock %}

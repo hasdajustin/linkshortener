@@ -17,7 +17,7 @@ A simple and elegant URL shortener built with **Flask**, **Bootstrap**, and **SQ
 
 ## Screenshot
 
-![Link shortener SS](https://linkshort-1jl5.onrender.com/ss.png)
+![App Screenshot](ss.png)
 
 ---
 
